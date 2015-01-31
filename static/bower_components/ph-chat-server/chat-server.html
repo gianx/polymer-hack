@@ -1,0 +1,14 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
+
+<polymer-element name="chat-server" attributes="server port">
+  <script>
+    Polymer('chat-server',{
+      ready:function(){
+        this.myserver = this.server;
+        this.myport = this.port;
+        console.log(this.server);
+      }
+    });
+  </script>
+</polymer-element>

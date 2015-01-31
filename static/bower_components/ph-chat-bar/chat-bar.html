@@ -1,0 +1,36 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
+<link rel="import" href="/bower_components/paper-input/paper-input.html">
+<link rel="import" href="/bower_components/paper-fab/paper-fab.html">
+<polymer-element name="chat-bar" attributes="server port">
+<template>
+<!-- 
+<paper-input id="mymsg" label="Header" value="{{valHeader}}"></paper-input>
+<input type=button on-click="{{mymsg}}" value="INVIA MESSAGGIO">
+-->
+<div class="send-message" layout horizontal>
+  <paper-input flex label="Type message..." id="mymsg" value=""></paper-input>
+  <paper-fab icon="send" id="sendButton" on-tap="{{mymsg}}"></paper-fab>
+</div>
+
+
+</template>
+  <script>
+    Polymer('chat-bar', {
+          ready: function(e) {
+              var messaggio = this.messaggio;
+              console.log(this.$.mymsg.value);
+
+          },
+
+          mymsg: function(){
+            var socket = io.connect('http://' + this.server + ":"+this.port+ '/test');
+            var messaggio = this.$.mymsg.value
+            socket.emit('my broadcast event', {data: messaggio});
+            this.$.mymsg.value = "";
+          }
+    }
+);
+  
+  </script>
+</polymer-element>

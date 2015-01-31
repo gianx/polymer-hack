@@ -4,30 +4,50 @@
     <title></title>
     <!-- Js libs -->
     <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
-    <link rel="import" href="bower_components/core-scaffold/core-scaffold.html">
+    <link rel="import" href="bower_components/core-toolbar/core-toolbar.html">
+    <link rel="import" href="bower_components/core-menu/core-menu.html">
     <link rel="import" href="bower_components/core-item/core-item.html">
-    <link rel="import" href="bower_components/paper-input/paper-input.html">
-    <link rel="import" href="bower_components/paper-fab/paper-fab.html">
+    <link rel="import" href="bower_components/core-scaffold/core-scaffold.html">
+    <link rel="import" href="bower_components/polymer/polymer.html">
+    <link rel="import" href="bower_components/ph-chat-bar/chat-bar.html">
+    <link rel="import" href="bower_components/ph-chat-list/chat-list.html">
+    <link rel="import" href="bower_components/ph-chat-server/chat-server.html">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+
     <!-- /Js libs -->
+<style>
+    body {
+      font-family: sans-serif;
+    }
+    core-header-panel {
+      background: white;
+    }
+    core-toolbar {
+      background-color: #03A9F4;
+    }
+</style>
 </head>
-<body fullbleed unresolved>
-    <core-scaffold>
-        <!-- Drawer panel -->
-        <core-header-panel navigation flex>
-            <core-toolbar class="tall">
-            <!-- an avatar and username will be here -->
-            </core-toolbar>
-        </core-header-panel>
 
-        <!-- App Title -->
-        <div tool layout horizontal flex>
-            <span flex>Kitteh Anonymous</span>
-            <core-icon icon="account-circle"></core-icon>
-            <span>15 people online</span>
-        </div>
+<!-- MYTEMPLATE -->
 
-        <!-- Main content -->
-        <div flex>Ciao</div>
-    </core-scaffold>
+<!-- /MYTEMPLATE -->
+
+<body>
+<body fullbleed vertical layout unresolved>
+  <core-header-panel flex>
+    <core-toolbar id="mainheader">
+      <paper-icon-button id="navicon" 
+        icon="arrow-back"></paper-icon-button>
+      <span flex>Eureka chat</span>
+    </core-toolbar>
+    <chat-bar server="127.0.0.1" port=8000></chat-bar>
+    <chat-list server="127.0.0.1" port=8000></chat-bar>
+  </core-header-panel>
 </body>
+
+
+<!-- <chat-bar server="127.0.0.1" port=8000></chat-bar>
+<chat-list server="127.0.0.1" port=8000></chat-list>
+</body> -->
 </html>
+

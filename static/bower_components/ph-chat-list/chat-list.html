@@ -1,0 +1,43 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
+
+<polymer-element name="chat-list" attributes="server port">
+<template>
+<style>
+p {
+  margin: 10px;
+  padding: 20px 20px;
+  border-radius: 20px;
+  background-color: #eee;
+  font-size: 17px;
+  font-family: verdana;
+}
+.messageuser {color:red;}
+</style>
+    <template repeat="{{s in messagelist}}">
+            <p><span class='messageuser'>{{s.user}}</span><span class="messagedata">{{s.data}}</span></p>
+    </template>
+</template>
+  <script>
+    Polymer('chat-list', {
+          ready: function(e) {
+              this.messagelist = [];
+              var socket = io.connect('http://' + this.server + ":"+this.port+ '/test');
+             
+              socket.on('my response', function(msg) {
+                  try {
+                      user = msg.user + ": ";
+                      message = msg.message.data;
+                  }  catch (e) {
+                      user = "Connected to server... ENJOY!!!";
+                      message = "";
+                  }
+                  document.querySelector('chat-list').messagelist.push({'user':user,'data':message});
+                  return false;
+              });
+            }
+    }
+);
+  
+  </script>
+</polymer-element>

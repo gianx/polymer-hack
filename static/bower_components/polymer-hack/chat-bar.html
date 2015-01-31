@@ -1,0 +1,25 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
+
+<polymer-element name="chat-bar" attributes="server port">
+  <template>
+    <input type="text" id="mytext" value="{{myvalue}}"></input>
+    <input type="button" on-click="{{ sendMyMessage }}" value="submit">
+  </template>
+  <script>
+    Polymer('chat-bar', {
+          ready: function(e) {
+              // component initialized
+          },     
+
+          sendMyMessage: function(e) {
+             var socket = io.connect('http://' + this.server+":"+this.port+ '/test');
+             socket.emit('my broadcast event', {data: this.myvalue});
+             return false;
+          }
+
+    }
+    );
+  
+  </script>
+</polymer-element>
