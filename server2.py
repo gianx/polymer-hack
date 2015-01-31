@@ -6,7 +6,7 @@ import json
 import uuid
 import random
 
-app = Flask(__name__,static_url_path='/')
+app = Flask(__name__,static_path = '/')
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
 
@@ -20,9 +20,15 @@ def getId():
     userid.append(temp)
     return "User"+str(temp)
 
+@app.route('/<path:path>')
+def static_proxy(path):
+    # send_static_file will guess the correct MIME type
+    print path
+    return app.send_static_file(path)
+
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('test.html')
 
 @socketio.on('my event', namespace='/test')
 def test_message(message):
